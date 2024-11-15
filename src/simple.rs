@@ -1,4 +1,4 @@
-// simple implementation of a turnstile finite state machine
+// simple implementation of a turnstile finite state machine.
 // https://en.wikipedia.org/wiki/Finite-state_machine
 enum State {
     UNLOCKED,
@@ -23,10 +23,13 @@ impl Default for Fsm {
 }
 
 impl Fsm {
-    fn _new(state: State) -> Fsm {
-        return Fsm { state };
+    fn _new(state: State) -> Self {
+        return Self { state };
     }
     fn transition(&mut self, event: Event) {
+        // this outer match statement isn't strictly necessary, since the inner matches are
+        // identical for each state. However, to illustrate the idea of a fsm properly,
+        // we will match on the state regardless.
         match self.state {
             State::LOCKED => match event {
                 Event::PUSH => {
