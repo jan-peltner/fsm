@@ -1,5 +1,33 @@
-// Implement a fsm via a state-transition-lookup-table implemented as a 2d array.
+// A finite state machine using a state-transition-table implemented as a 2d array.
 // In this example we'll model the states and transitions of Super Mario.
+// ---------------------------------------------------------------------------------------------
+// Each row is mapped to a STATE; the rows reflect the state that we're currently in.
+// Each column models the transition where the index is the EVENT and the value at that index is
+// the target STATE
+
+#[derive(Debug, Copy, Clone)]
+enum State {
+    MARIO,
+    SUPERMARIO,
+    FIREMARIO,
+    CAPEMARIO,
+    DEAD,
+}
+
+impl State {
+    const COUNT: usize = 5;
+}
+
+enum Event {
+    MUSHROOM,
+    FLOWER,
+    FEATHER,
+    DAMAGE,
+}
+
+impl Event {
+    const COUNT: usize = 4;
+}
 
 type StateTransitionTable = [[State; Event::COUNT]; State::COUNT];
 
@@ -35,30 +63,6 @@ const STATE_TRANSITION_TABLE: StateTransitionTable = [
     // 💀
     [State::DEAD, State::DEAD, State::DEAD, State::DEAD],
 ];
-
-#[derive(Debug, Copy, Clone)]
-enum State {
-    MARIO,
-    SUPERMARIO,
-    FIREMARIO,
-    CAPEMARIO,
-    DEAD,
-}
-
-impl State {
-    const COUNT: usize = 5;
-}
-
-enum Event {
-    MUSHROOM,
-    FLOWER,
-    FEATHER,
-    DAMAGE,
-}
-
-impl Event {
-    const COUNT: usize = 4;
-}
 
 struct Fsm {
     state: State,

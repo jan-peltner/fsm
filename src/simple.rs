@@ -15,8 +15,8 @@ struct Fsm {
 }
 
 impl Default for Fsm {
-    fn default() -> Fsm {
-        return Fsm {
+    fn default() -> Self {
+        return Self {
             state: State::LOCKED,
         };
     }
